@@ -26,7 +26,8 @@ public class resourceManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Welcome! \n Press 'W' to buy wood, 'S' to buy stone and 'E' to earn money. \n Press 'H', 'P' or 'M' to build wood, stone or mixed houses.");
+        Debug.Log("Welcome!");
+        Debug.Log("Press 'W' to buy wood, 'S' to buy stone and 'E' to earn money.\n Press 'H', 'P' or 'M' to build wood, stone or mixed houses.");
         Debug.Log($"You've earned {initialMoney} money!");
         _currentMoney = initialMoney;
     }
