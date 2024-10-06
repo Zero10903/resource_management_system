@@ -5,9 +5,12 @@ using UnityEngine;
 public class resourceManager : MonoBehaviour
 {
     // ? Private variables
-    private int _currentWood;
-    private int _currentStone;
-    private int _currentMoney;
+    private int _currentWood = 0;
+    private int _currentStone = 0;
+    private int _currentMoney = 0;
+    private int _currentWoodHouse = 0;
+    private int _currentStoneHouse = 0;
+    private int _currentMixedHouse = 0;
 
     // ? Public variables
     public int initialMoney = 100;
@@ -15,10 +18,14 @@ public class resourceManager : MonoBehaviour
     public int woodCost = 10;
     public int stoneCost = 15;
     public int maxResources = 20;
+    public int woodHouseCost = 5;
+    public int stoneHouseCost = 5;
+    public int mixedHouseWoodCost = 5;
+    public int mixedHouseStoneCost = 5;
 
     void Start()
     {
-        Debug.Log("Welcome! \n Press 'W' to buy wood, 'S' to buy stone and 'E' to earn money.");
+        Debug.Log("Welcome! \n Press 'W' to buy wood, 'S' to buy stone and 'E' to earn money. \n Press 'H', 'P' or 'M' to build wood, stone or mixed houses.");
         Debug.Log($"You've earned {initialMoney} money!");
         _currentMoney = initialMoney;
     }
@@ -37,6 +44,15 @@ public class resourceManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E)){
             GetMoney();
+        }
+        if(Input.GetKeyDown(KeyCode.H)){
+            BuildWoodHouse();
+        }
+        if(Input.GetKeyDown(KeyCode.P)){
+            BuildStoneHouse();
+        }
+        if(Input.GetKeyDown(KeyCode.M)){
+            BuildMixedHouse();
         }
     }
 
@@ -73,5 +89,36 @@ public class resourceManager : MonoBehaviour
     private void GetMoney(){
         _currentMoney += moneyPerKeydown;
         Debug.Log($"Current money: {_currentMoney}");
+    }
+
+    private void BuildWoodHouse(){
+        if(_currentWood < woodHouseCost){
+            Debug.LogError("You don't have enough wood. Press W to buy wood.");
+            return;
+        }
+        _currentWoodHouse++;
+        _currentWood -= woodHouseCost;
+        Debug.Log("You have built a wood house!");
+    }
+
+    private void BuildStoneHouse(){
+        if(_currentStone < stoneHouseCost){
+            Debug.LogError("You don't have enough stone. Press S to buy stone.");
+            return;
+        }
+        _currentStoneHouse++;
+        _currentStone -= stoneHouseCost;
+        Debug.Log("You have built a stone house!");
+    }
+
+    private void BuildMixedHouse(){
+        if(_currentWood < mixedHouseWoodCost && _currentStone < mixedHouseStoneCost){
+            Debug.LogError("You don't have enough resources. Press W or S to buy wood or stone.");
+            return;
+        }
+        _currentMixedHouse++;
+        _currentWood -= mixedHouseWoodCost;
+        _currentStone -= mixedHouseStoneCost;
+        Debug.Log("You have built a mixed house!");
     }
 }
