@@ -11,13 +11,14 @@ public class resourceManager : MonoBehaviour
 
     // ? Public variables
     public int initialMoney = 100;
+    public int moneyPerKeydown = 20;
     public int woodCost = 10;
     public int stoneCost = 15;
     public int maxResources = 20;
 
     void Start()
     {
-        Debug.Log("Welcome! \n Press 'W' to buy wood and 'S' to buy stone.");
+        Debug.Log("Welcome! \n Press 'W' to buy wood, 'S' to buy stone and 'E' to earn money.");
         Debug.Log($"You've earned {initialMoney} money!");
         _currentMoney = initialMoney;
     }
@@ -30,17 +31,18 @@ public class resourceManager : MonoBehaviour
     private void CheckInputs(){
         if(Input.GetKeyDown(KeyCode.W)){
             GetWood();
-            Debug.Log(_currentWood);
         }
         if(Input.GetKeyDown(KeyCode.S)){
             GetStone();
-            Debug.Log(_currentStone);
+        }
+        if(Input.GetKeyDown(KeyCode.E)){
+            GetMoney();
         }
     }
 
     private void GetWood(){
         if(_currentMoney < woodCost){
-            Debug.LogError("You don't have enough money to buy wood.");
+            Debug.LogError("You don't have enough money to buy wood. Press 'E' to earn money.");
             return;
         }
         
@@ -55,7 +57,7 @@ public class resourceManager : MonoBehaviour
 
     private void GetStone(){
         if(_currentMoney < stoneCost){
-            Debug.LogError("You don't have enough money to buy stone.");
+            Debug.LogError("You don't have enough money to buy stone. Press 'E' to earn money.");
             return;
         }
         
@@ -66,5 +68,10 @@ public class resourceManager : MonoBehaviour
 
         _currentStone++;
         _currentMoney -= stoneCost;
+    }
+
+    private void GetMoney(){
+        _currentMoney += moneyPerKeydown;
+        Debug.Log($"Current money: {_currentMoney}");
     }
 }
