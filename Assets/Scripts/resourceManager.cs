@@ -11,6 +11,7 @@ public class resourceManager : MonoBehaviour
     private int _currentWoodHouse = 0;
     private int _currentStoneHouse = 0;
     private int _currentMixedHouse = 0;
+    private List<string> _logs = new List<string>(); 
 
     // ? Public variables
     public int initialMoney = 100;
@@ -57,6 +58,9 @@ public class resourceManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R)){
             ShowResources();
         }
+        if(Input.GetKeyDown(KeyCode.K)){
+            ShowLog();
+        }
     }
 
     private void GetWood(){
@@ -72,6 +76,7 @@ public class resourceManager : MonoBehaviour
 
         _currentWood++;
         _currentMoney -= woodCost;
+        UpdateLog();
     }
 
     private void GetStone(){
@@ -87,6 +92,7 @@ public class resourceManager : MonoBehaviour
 
         _currentStone++;
         _currentMoney -= stoneCost;
+        UpdateLog();
     }
 
     private void GetMoney(){
@@ -101,6 +107,7 @@ public class resourceManager : MonoBehaviour
         }
         _currentWoodHouse++;
         _currentWood -= woodHouseCost;
+        UpdateLog();
         Debug.Log("You have built a wood house!");
     }
 
@@ -111,6 +118,7 @@ public class resourceManager : MonoBehaviour
         }
         _currentStoneHouse++;
         _currentStone -= stoneHouseCost;
+        UpdateLog();
         Debug.Log("You have built a stone house!");
     }
 
@@ -122,10 +130,23 @@ public class resourceManager : MonoBehaviour
         _currentMixedHouse++;
         _currentWood -= mixedHouseWoodCost;
         _currentStone -= mixedHouseStoneCost;
+        UpdateLog();
         Debug.Log("You have built a mixed house!");
     }
 
     private void ShowResources(){
         Debug.Log($"Money: {_currentMoney}, wood: {_currentWood}, stone: {_currentStone}, \n wood houses: {_currentWoodHouse}, stone houses: {_currentStoneHouse}, mixed houses: {_currentMixedHouse}");
+    }
+
+    private void UpdateLog(){
+        _logs.Add($"Money: {_currentMoney}, wood: {_currentWood}, stone: {_currentStone}, wood houses: {_currentWoodHouse}, stone houses: {_currentStoneHouse}, mixed houses: {_currentMixedHouse}");
+    }
+
+    private void ShowLog(){
+        int i = 1;
+        foreach(string log in _logs){
+            Debug.Log($"Log Nº{i}: {log}");
+            i++;
+        }
     }
 }
