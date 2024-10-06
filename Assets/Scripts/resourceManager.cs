@@ -54,6 +54,9 @@ public class resourceManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.M)){
             BuildMixedHouse();
         }
+        if(Input.GetKeyDown(KeyCode.R)){
+            ShowResources();
+        }
     }
 
     private void GetWood(){
@@ -120,5 +123,9 @@ public class resourceManager : MonoBehaviour
         _currentWood -= mixedHouseWoodCost;
         _currentStone -= mixedHouseStoneCost;
         Debug.Log("You have built a mixed house!");
+    }
+
+    private void ShowResources(){
+        Debug.Log($"Money: {_currentMoney}, wood: {_currentWood}, stone: {_currentStone}, \n wood houses: {_currentWoodHouse}, stone houses: {_currentStoneHouse}, mixed houses: {_currentMixedHouse}");
     }
 }
