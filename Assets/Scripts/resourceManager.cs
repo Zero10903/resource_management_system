@@ -124,7 +124,7 @@ public class resourceManager : MonoBehaviour
     }
 
     private void BuildMixedHouse(){
-        if(_currentWood < mixedHouseWoodCost && _currentStone < mixedHouseStoneCost){
+        if((_currentWood < mixedHouseWoodCost) && (_currentStone < mixedHouseStoneCost)){
             Debug.LogError("You don't have enough resources. Press W or S to buy wood or stone.");
             return;
         }
